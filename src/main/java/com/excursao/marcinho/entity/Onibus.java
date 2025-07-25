@@ -1,9 +1,18 @@
 package com.excursao.marcinho.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.List;
 @Entity
 @Table(name = "onibus")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Onibus {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

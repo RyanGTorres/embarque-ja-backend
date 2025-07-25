@@ -2,6 +2,7 @@ package com.excursao.marcinho.entity;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.*;
 import java.util.List;
 
@@ -23,15 +24,19 @@ public class Roteiro {
     private String horaRetorno;
 
     @Column(name = "data_saida")
-    private Date dataSaida;
+    private LocalDate dataSaida;
 
     @Column(name = "data_retorno")
-    private Date dataRetorno;
+    private LocalDate dataRetorno;
 
-    @OneToOne
-    @JoinColumn(name = "excursao_id")
+    @OneToOne(mappedBy = "roteiro")
     private Excursao excursao;
 
-    @OneToMany(mappedBy = "roteiro")
-    private List<RoteiroEmbarque> roteiroEmbarque;
+    @ManyToMany
+    @JoinTable(
+            name = "embarque_roteiro",
+            joinColumns = @JoinColumn(name = "roteiro_id"),
+            inverseJoinColumns = @JoinColumn(name = "embarque_id")
+    )
+    private List<Embarque> embarques;
 }

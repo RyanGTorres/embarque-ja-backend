@@ -17,6 +17,6 @@ public class Embarque {
     @Column(name = "hora_embarque")
     private String horaEmbarque;
 
-    @OneToMany(mappedBy = "embarque")
-    private List<RoteiroEmbarque> roteiroEmbarque;
+    @ManyToMany(mappedBy = "embarques")
+    private List<Roteiro> roteiros;
 }

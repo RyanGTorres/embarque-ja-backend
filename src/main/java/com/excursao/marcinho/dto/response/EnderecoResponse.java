@@ -1,12 +1,19 @@
-package com.excursao.marcinho.dto.response;
+package com.excursao.marcinho.dto.request;
 
-public record EnderecoResponse(
-        Long id,
-        String logradouro,
-        String regiao,
-        String bairro,
-        String cidade,
-        String cep,
-        ClienteResponse clienteResponse
-) {
+import com.excursao.marcinho.entity.Cliente;
+import jakarta.persistence.Column;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import lombok.*;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class EnderecoRequest {
+    private String logradouro;
+    private String regiao;
+    private String bairro;
+    private String cidade;
+    private String cep;
 }

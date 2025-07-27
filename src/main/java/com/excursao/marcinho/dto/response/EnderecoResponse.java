@@ -1,16 +1,16 @@
-package com.excursao.marcinho.dto.request;
+package com.excursao.marcinho.dto.response;
 
-import com.excursao.marcinho.entity.Cliente;
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class EnderecoRequest {
+public class EnderecoResponse {
+    private Long id;
     private String logradouro;
     private String regiao;
     private String bairro;

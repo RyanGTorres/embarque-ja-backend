@@ -6,7 +6,7 @@ import com.excursao.marcinho.entity.Endereco;
 import org.mapstruct.*;
 
 @Mapper(componentModel = "spring")
-public interface EndrecoMapper {
+public interface EnderecoMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "cliente", ignore = true)

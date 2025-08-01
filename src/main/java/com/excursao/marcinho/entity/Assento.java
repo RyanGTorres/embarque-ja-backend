@@ -20,12 +20,8 @@ public class Assento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "modelo")
-    private String modelo;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status_assento")
-    private StatusAssento statusAssento;
+    @Column(name = "numero")
+    private Integer numero;
 
     @OneToMany(mappedBy = "assento")
     private List<Reserva> reserva;

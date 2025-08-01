@@ -1,5 +1,6 @@
 package com.excursao.marcinho.entity;
 
+import com.excursao.marcinho.enums.StatusAssento;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,6 +24,10 @@ public class Reserva {
 
     @Column(name = "criado_em")
     private LocalDateTime criadoEm;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status_assento")
+    private StatusAssento statusAssento;
 
     @ManyToOne
     @JoinColumn(name = "onibus_id")

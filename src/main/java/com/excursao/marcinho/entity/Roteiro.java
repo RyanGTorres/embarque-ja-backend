@@ -1,6 +1,10 @@
 package com.excursao.marcinho.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -8,6 +12,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "roteiro")
+@Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Roteiro {
 
     @Id

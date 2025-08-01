@@ -40,4 +40,8 @@ public class OnibusService {
 
         return mapper.toResponse(atualizado);
     }
+
+    public void delete(Long id){
+        repository.deleteById(id);
+    }
 }

@@ -34,4 +34,5 @@ public class OnibusController {
     public ResponseEntity<List<OnibusResponse>> findAll(){
         return ResponseEntity.ok(service.findAll());
     }
+
 }

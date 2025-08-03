@@ -24,7 +24,10 @@ public class Onibus {
     @Column(name = "empresa")
     private String empresa;
 
+    @Column(name = "total_assentos")
+    private Integer totalAssentos;
+
     @OneToMany(mappedBy = "onibus")
-    private List<Reserva> reserva;
+    private List<ExcursaoOnibus> excursaoOnibus;
 
 }

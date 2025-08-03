@@ -23,9 +23,9 @@ public class Embarque {
     @Column(name = "local_embarque")
     private String localEmbarque;
 
-    @Column(name = "hora_embarque")
-    private String horaEmbarque;
+    @Column(name = "horario_embarque")
+    private String horarioEmbarque;
 
     @ManyToMany(mappedBy = "embarques")
-    private List<Roteiro> roteiros;
+    private List<Excursao> excursaos;
 }

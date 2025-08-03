@@ -27,30 +27,30 @@ class MarcinhoApplicationTests {
 
 	@AfterEach
 	void depoisDeCada(){
-		reservaRepository.deleteAll();
-		clienteRepository.deleteAll();
-		onibusRepository.deleteAll();
-		assentoRepository.deleteAll();
-		excursaoRepository.deleteAll();
+//		reservaRepository.deleteAll();
+//		clienteRepository.deleteAll();
+//		onibusRepository.deleteAll();
+//		assentoRepository.deleteAll();
+//		excursaoRepository.deleteAll();
 	}
 
 	@Test
 	void contextLoads() {
-
-		val clientR = clienteRepository.save(Cliente.builder().nome("Fulano").build());
-		val onibusviagem = onibusRepository.save(Onibus.builder().empresa("onibusviagem").build());
-		val assentoR = assentoRepository.save(Assento.builder().statusAssento(StatusAssento.LIVRE).build());
-		val excursao = excursaoRepository.save(Excursao.builder().hotel("Pousada Praia").build());
-
-
-		val build = Reserva.builder()
-						.cliente(clientR)
-						.onibus(onibusviagem)
-						.assento(assentoR)
-						.excursao(excursao)
-						.build();
-		reservaRepository.save(build);
-		reservaRepository.save(build);
+//
+//		val clientR = clienteRepository.save(Cliente.builder().nome("Fulano").build());
+//		val onibusviagem = onibusRepository.save(Onibus.builder().empresa("onibusviagem").build());
+//		val assentoR = assentoRepository.save(Assento.builder().statusAssento(StatusAssento.LIVRE).build());
+//		val excursao = excursaoRepository.save(Excursao.builder().hotel("Pousada Praia").build());
+//
+//
+//		val build = Reserva.builder()
+//						.cliente(clientR)
+//						.onibus(onibusviagem)
+//						.assento(assentoR)
+//						.excursao(excursao)
+//						.build();
+//		reservaRepository.save(build);
+//		reservaRepository.save(build);
 	}
 
 

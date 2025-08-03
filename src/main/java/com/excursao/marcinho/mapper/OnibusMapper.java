@@ -11,7 +11,7 @@ import java.util.List;
 public interface OnibusMapper {
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "reserva", ignore = true)
+    @Mapping(target = "excursaoOnibus", ignore = true)
     Onibus toEntity (OnibusRequest onibusRequest);
 
     OnibusResponse toResponse (Onibus onibus);
@@ -19,7 +19,7 @@ public interface OnibusMapper {
     List<OnibusResponse> toListResponse (List<Onibus> onibusList);
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "reserva", ignore = true)
+    @Mapping(target = "excursaoOnibus", ignore = true)
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateFromResponse(OnibusRequest onibusRequest, @MappingTarget Onibus onibus);
 }

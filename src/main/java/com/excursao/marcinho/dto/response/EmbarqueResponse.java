@@ -13,5 +13,5 @@ import lombok.NoArgsConstructor;
 public class EmbarqueResponse {
     private Long id;
     private String localEmbarque;
-    private String horaEmbarque;
+    private String horarioEmbarque;
 }

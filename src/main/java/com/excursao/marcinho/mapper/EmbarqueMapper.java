@@ -11,7 +11,7 @@ import org.mapstruct.*;
 public interface EmbarqueMapper {
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "roteiros", ignore = true)
+    @Mapping(target = "excursaos", ignore = true)
     Embarque toEntity(EmbarqueRequest embarqueRequest);
 
     EmbarqueResponse toResponse(Embarque embarque);
@@ -19,7 +19,7 @@ public interface EmbarqueMapper {
     List<EmbarqueResponse> toListResponse(List<Embarque> embarqueList);
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "roteiros", ignore = true)
+    @Mapping(target = "excursaos", ignore = true)
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateEnittyFromRequest(EmbarqueRequest embarqueRequest, @MappingTarget Embarque embarque);
 

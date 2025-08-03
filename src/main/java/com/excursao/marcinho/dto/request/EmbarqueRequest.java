@@ -12,5 +12,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class EmbarqueRequest {
     private String localEmbarque;
-    private String horaEmbarque;
+    private String horarioEmbarque;
 }

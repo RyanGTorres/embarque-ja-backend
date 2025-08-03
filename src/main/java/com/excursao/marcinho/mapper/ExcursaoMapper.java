@@ -7,20 +7,20 @@ import org.mapstruct.*;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = RoteiroMapper.class)
+@Mapper(componentModel = "spring", uses = EmbarqueMapper.class)
 public interface ExcursaoMapper {
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "roteiro", ignore = true)
-    @Mapping(target = "reserva", ignore = true)
+    @Mapping(target = "excursaoOnibus", ignore = true)
+    @Mapping(target = "embarques", ignore = true)
     Excursao toEntity (ExcursaoRequest excursaoRequest);
 
-    @Mapping(target = "roteiro", source = "roteiro")
+    @Mapping(target = "embarques", source = "embarques")
     ExcursaoResponse toResponse(Excursao excursao);
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "roteiro", ignore = true)
-    @Mapping(target = "reserva", ignore = true)
+    @Mapping(target = "excursaoOnibus", ignore = true)
+    @Mapping(target = "embarques", ignore = true)
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateEntityFromRequest (ExcursaoRequest excursaoRequest, @MappingTarget Excursao excursao);
 

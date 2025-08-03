@@ -2,10 +2,7 @@ package com.excursao.marcinho.entity;
 
 import com.excursao.marcinho.enums.StatusAssento;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -22,24 +19,19 @@ public class Reserva {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "criado_em")
-    private LocalDateTime criadoEm;
+    @Column(name = "criada_em")
+    private LocalDateTime criadaEm;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status_assento")
     private StatusAssento statusAssento;
 
-    @ManyToOne
-    @JoinColumn(name = "onibus_id")
-    private Onibus onibus;
+    @Column(name = "numero_assento")
+    private Integer numeroAssento;
 
     @ManyToOne
-    @JoinColumn(name = "excursao_id")
-    private Excursao excursao;
-
-    @ManyToOne
-    @JoinColumn(name = "assento_id")
-    private Assento assento;
+    @JoinColumn(name = "excursaoOnibus_id")
+    private ExcursaoOnibus excursaoOnibus;
 
     @ManyToOne
     @JoinColumn(name = "cliente_id")

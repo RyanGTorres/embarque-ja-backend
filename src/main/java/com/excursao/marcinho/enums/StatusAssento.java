@@ -1,7 +1,7 @@
 package com.excursao.marcinho.enums;
 
 public enum StatusAssento {
-    OLCUPADO,
+    OCUPADO,
     LIVRE,
     RESERVADO;
 }

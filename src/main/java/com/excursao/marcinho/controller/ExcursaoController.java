@@ -31,7 +31,7 @@ public class ExcursaoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(excursaoService.save(excursaoRequest));
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     public ResponseEntity<ExcursaoResponse> update(@PathVariable Long id, @RequestBody ExcursaoRequest excursaoRequest){
         return ResponseEntity.ok(excursaoService.update(id, excursaoRequest));
     }

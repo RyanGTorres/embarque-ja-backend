@@ -5,12 +5,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class OnibusRequest {
-    private String modelo;
-    private String empresa;
-    private Integer totalAssentos;
+public class ReservaRequest {
+    private Long excursaoId;
+    private Long clienteId;
+    private Integer numeroAssento;
 }

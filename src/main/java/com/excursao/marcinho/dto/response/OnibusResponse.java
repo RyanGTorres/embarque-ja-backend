@@ -16,4 +16,6 @@ public class OnibusResponse {
     private String modelo;
 
     private String empresa;
+
+    private Integer totalAssentos;
 }

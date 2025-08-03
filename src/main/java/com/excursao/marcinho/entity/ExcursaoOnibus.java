@@ -1,28 +1,28 @@
 package com.excursao.marcinho.entity;
 
-import com.excursao.marcinho.enums.StatusAssento;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Entity
-@Table(name = "assento")
+@Table(name = "excursao_onibus")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Assento {
+public class ExcursaoOnibus {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "numero")
-    private Integer numero;
+    @ManyToOne
+    @JoinColumn(name = "onibus_id")
+    private Onibus onibus;
 
-    @OneToMany(mappedBy = "assento")
-    private List<Reserva> reserva;
+    @ManyToOne
+    @JoinColumn(name = "excursao_id")
+    private Excursao excursao;
 }

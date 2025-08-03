@@ -2,13 +2,15 @@ package com.excursao.marcinho.service;
 
 import com.excursao.marcinho.dto.request.ExcursaoRequest;
 import com.excursao.marcinho.dto.response.ExcursaoResponse;
+import com.excursao.marcinho.entity.Embarque;
 import com.excursao.marcinho.entity.Excursao;
-import com.excursao.marcinho.entity.Roteiro;
 import com.excursao.marcinho.mapper.ExcursaoMapper;
+import com.excursao.marcinho.repository.EmbarqueRepository;
 import com.excursao.marcinho.repository.ExcursaoRepository;
-import com.excursao.marcinho.repository.RoteiroRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -16,25 +18,25 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ExcursaoService {
     private final ExcursaoRepository excursaoRepository;
-    private final RoteiroRepository roteiroRepository;
+    private final EmbarqueRepository embarqueRepository;
     private final ExcursaoMapper mapper;
 
     public ExcursaoResponse save (ExcursaoRequest request){
         Excursao excursao = mapper.toEntity(request);
 
-        if (request.getRoteiroId() != null){
-            Roteiro roteiro = roteiroRepository.findById(request.getRoteiroId())
-                    .orElseThrow(() -> new RuntimeException("O roteiro não encontrou o id!"));
+        if (request.getEmbarquesIds() != null && !request.getEmbarquesIds().isEmpty()){
+            List<Embarque> embarques = embarqueRepository.findAllById(request.getEmbarquesIds());
 
-            if (roteiro.getExcursao() != null){
-                throw new RuntimeException("Este roteiro já possui uma excursão!");
+            if (embarques.size() != request.getEmbarquesIds().size()){
+                throw new RuntimeException("O alguns embarques nao foram encontrado!");
             }
 
-            excursao.setRoteiro(roteiro);
+            excursao.setEmbarques(embarques);
         }
 
         Excursao atualizado = excursaoRepository.save(excursao);
         return mapper.toResponse(atualizado);
+
     }
 
     public List<ExcursaoResponse> findAll(){
@@ -54,6 +56,20 @@ public class ExcursaoService {
                 .orElseThrow(() -> new RuntimeException("O id de excursoa não e valido! ID: "+id));
 
         mapper.updateEntityFromRequest(request, excursao);
+
+        if (request.getEmbarquesIds() != null){
+            if (request.getEmbarquesIds().isEmpty()){
+                excursao.setEmbarques(new ArrayList<>());
+            }
+            List<Embarque> embarqueList = embarqueRepository.findAllById(request.getEmbarquesIds());
+
+            if (embarqueList.size() != request.getEmbarquesIds().size()){
+                throw new RuntimeException("Alguns embarques não foram encontrados!");
+            }
+            excursao.setEmbarques(embarqueList);
+        }
+
+
         Excursao atualizado = excursaoRepository.save(excursao);
 
         return mapper.toResponse(atualizado);

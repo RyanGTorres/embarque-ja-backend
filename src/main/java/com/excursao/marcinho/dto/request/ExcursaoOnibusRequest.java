@@ -1,5 +1,7 @@
 package com.excursao.marcinho.dto.request;
 
+import com.excursao.marcinho.entity.Excursao;
+import com.excursao.marcinho.entity.Onibus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,8 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class OnibusRequest {
-    private String modelo;
-    private String empresa;
-    private Integer totalAssentos;
+public class ExcursaoOnibusRequest {
+    private Long onibus;
+    private Long excursao;
 }

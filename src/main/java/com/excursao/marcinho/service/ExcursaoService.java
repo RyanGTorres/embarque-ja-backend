@@ -4,6 +4,8 @@ import com.excursao.marcinho.dto.request.ExcursaoRequest;
 import com.excursao.marcinho.dto.response.ExcursaoResponse;
 import com.excursao.marcinho.entity.Embarque;
 import com.excursao.marcinho.entity.Excursao;
+import com.excursao.marcinho.exceptions.notfound.EmbarqueNotFoundException;
+import com.excursao.marcinho.exceptions.notfound.ExcursaoNotFoundException;
 import com.excursao.marcinho.mapper.ExcursaoMapper;
 import com.excursao.marcinho.repository.EmbarqueRepository;
 import com.excursao.marcinho.repository.ExcursaoRepository;
@@ -28,7 +30,7 @@ public class ExcursaoService {
             List<Embarque> embarques = embarqueRepository.findAllById(request.getEmbarquesIds());
 
             if (embarques.size() != request.getEmbarquesIds().size()){
-                throw new RuntimeException("O alguns embarques nao foram encontrado!");
+                throw new EmbarqueNotFoundException();
             }
 
             excursao.setEmbarques(embarques);
@@ -47,13 +49,13 @@ public class ExcursaoService {
 
     public ExcursaoResponse findById(Long id){
         Excursao excursao = excursaoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("O id de excursoa não e valido! ID: "+id));
+                .orElseThrow(ExcursaoNotFoundException::new);
         return mapper.toResponse(excursao);
     }
 
     public ExcursaoResponse update (Long id, ExcursaoRequest request){
         Excursao excursao = excursaoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("O id de excursoa não e valido! ID: "+id));
+                .orElseThrow(ExcursaoNotFoundException::new);
 
         mapper.updateEntityFromRequest(request, excursao);
 
@@ -64,7 +66,7 @@ public class ExcursaoService {
             List<Embarque> embarqueList = embarqueRepository.findAllById(request.getEmbarquesIds());
 
             if (embarqueList.size() != request.getEmbarquesIds().size()){
-                throw new RuntimeException("Alguns embarques não foram encontrados!");
+                throw new EmbarqueNotFoundException();
             }
             excursao.setEmbarques(embarqueList);
         }

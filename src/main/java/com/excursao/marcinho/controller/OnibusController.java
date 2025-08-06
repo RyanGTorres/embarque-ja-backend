@@ -3,6 +3,7 @@ package com.excursao.marcinho.controller;
 import com.excursao.marcinho.dto.request.OnibusRequest;
 import com.excursao.marcinho.dto.response.OnibusResponse;
 import com.excursao.marcinho.service.OnibusService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,12 +17,12 @@ public class OnibusController {
     private final OnibusService service;
 
     @PostMapping
-    public ResponseEntity<OnibusResponse> save (@RequestBody OnibusRequest request){
+    public ResponseEntity<OnibusResponse> save (@Valid @RequestBody OnibusRequest request){
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(request)) ;
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<OnibusResponse>  update(@PathVariable Long id, @RequestBody OnibusRequest request){
+    public ResponseEntity<OnibusResponse>  update(@PathVariable Long id,@Valid @RequestBody OnibusRequest request){
         return ResponseEntity.ok( service.update(id, request));
     }
 
@@ -33,6 +34,12 @@ public class OnibusController {
     @GetMapping
     public ResponseEntity<List<OnibusResponse>> findAll(){
         return ResponseEntity.ok(service.findAll());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable Long id){
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

@@ -3,6 +3,7 @@ package com.excursao.marcinho.controller;
 import com.excursao.marcinho.dto.request.ExcursaoRequest;
 import com.excursao.marcinho.dto.response.ExcursaoResponse;
 import com.excursao.marcinho.service.ExcursaoService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,12 +28,12 @@ public class ExcursaoController {
     }
 
     @PostMapping
-    public ResponseEntity<ExcursaoResponse> save(@RequestBody ExcursaoRequest excursaoRequest){
+    public ResponseEntity<ExcursaoResponse> save(@Valid @RequestBody ExcursaoRequest excursaoRequest){
         return ResponseEntity.status(HttpStatus.CREATED).body(excursaoService.save(excursaoRequest));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ExcursaoResponse> update(@PathVariable Long id, @RequestBody ExcursaoRequest excursaoRequest){
+    public ResponseEntity<ExcursaoResponse> update(@PathVariable Long id, @Valid @RequestBody ExcursaoRequest excursaoRequest){
         return ResponseEntity.ok(excursaoService.update(id, excursaoRequest));
     }
 

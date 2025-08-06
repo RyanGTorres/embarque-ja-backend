@@ -3,6 +3,7 @@ package com.excursao.marcinho.controller;
 import com.excursao.marcinho.dto.request.EmbarqueRequest;
 import com.excursao.marcinho.dto.response.EmbarqueResponse;
 import com.excursao.marcinho.service.EmbarqueService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.HttpStatus;
@@ -19,8 +20,9 @@ public class EmbarqueController {
     private final EmbarqueService service;
 
     @GetMapping("/{id}")
-    public ResponseEntity<EmbarqueResponse> findById(@PathVariable Long id){
-        return ResponseEntity.ok(service.findByID(id));
+    @ResponseStatus(HttpStatus.OK)
+    public EmbarqueResponse findById(@PathVariable Long id){
+        return service.findByID(id);
     }
 
     @GetMapping
@@ -29,12 +31,12 @@ public class EmbarqueController {
     }
 
     @PostMapping
-    public ResponseEntity<EmbarqueResponse> save (@RequestBody EmbarqueRequest embarqueRequest){
+    public ResponseEntity<EmbarqueResponse> save (@Valid @RequestBody EmbarqueRequest embarqueRequest){
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(embarqueRequest));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<EmbarqueResponse> update (@PathVariable Long id, @RequestBody EmbarqueRequest embarqueRequest){
+    public ResponseEntity<EmbarqueResponse> update (@PathVariable Long id, @Valid @RequestBody EmbarqueRequest embarqueRequest){
         return ResponseEntity.ok(service.update(id, embarqueRequest));
     }
 

@@ -4,6 +4,7 @@ package com.excursao.marcinho.controller;
 import com.excursao.marcinho.dto.request.ClienteRequest;
 import com.excursao.marcinho.dto.response.ClienteResponse;
 import com.excursao.marcinho.service.ClienteService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class ClienteController {
     private final ClienteService service;
 
     @PostMapping
-    public ResponseEntity<ClienteResponse> save (@RequestBody ClienteRequest clienteRequest){
+    public ResponseEntity<ClienteResponse> save (@Valid @RequestBody ClienteRequest clienteRequest){
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(clienteRequest));
     }
 
@@ -33,7 +34,7 @@ public class ClienteController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ClienteResponse> update (@PathVariable Long id, @RequestBody ClienteRequest clienteRequest){
+    public ResponseEntity<ClienteResponse> update (@PathVariable Long id,@Valid @RequestBody ClienteRequest clienteRequest){
         return ResponseEntity.ok(service.update(id, clienteRequest));
     }
 }

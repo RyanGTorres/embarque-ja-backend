@@ -5,6 +5,9 @@ import com.excursao.marcinho.dto.response.ExcursaoOnibusResponse;
 import com.excursao.marcinho.entity.Excursao;
 import com.excursao.marcinho.entity.ExcursaoOnibus;
 import com.excursao.marcinho.entity.Onibus;
+import com.excursao.marcinho.exceptions.notfound.ExcursaoNotFoundException;
+import com.excursao.marcinho.exceptions.notfound.ExcursaoOnibusNotFoundException;
+import com.excursao.marcinho.exceptions.notfound.OnibusNotFoundException;
 import com.excursao.marcinho.mapper.ExcursaoOnibusMapper;
 import com.excursao.marcinho.repository.ExcursaoOnibusRepository;
 import com.excursao.marcinho.repository.ExcursaoRepository;
@@ -24,10 +27,10 @@ public class ExcursaoOnibusService {
 
     public ExcursaoOnibusResponse save (ExcursaoOnibusRequest request){
         Excursao excursao = excursaoRepository.findById(request.getExcursao())
-                .orElseThrow(() -> new RuntimeException("O id de excusão é invalido! ID:"+request.getOnibus()) );
+                .orElseThrow(ExcursaoNotFoundException::new);
 
         Onibus onibus = onibusRepository.findById(request.getOnibus())
-                .orElseThrow(() -> new RuntimeException("O id de excusão é invalido! ID:"+request.getOnibus()) );
+                .orElseThrow(OnibusNotFoundException::new);
 
 
         ExcursaoOnibus excursaoOnibus = mapper.toEntity(request);
@@ -45,22 +48,22 @@ public class ExcursaoOnibusService {
 
     public ExcursaoOnibusResponse findById(Long id){
         ExcursaoOnibus excursao = excursaoOnibusRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("O id digitado não é valido! ID: "+id));
+                .orElseThrow(ExcursaoOnibusNotFoundException::new);
         return mapper.toResponse(excursao);
     }
 
     public ExcursaoOnibusResponse update (Long id, ExcursaoOnibusRequest request){
         ExcursaoOnibus excursao = excursaoOnibusRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("O id digitado não é valido! ID: "+id));
+                .orElseThrow(ExcursaoOnibusNotFoundException::new);
 
         if (request.getExcursao() != null){
             excursaoRepository.findById(request.getExcursao())
-                    .orElseThrow(() -> new RuntimeException("O id excursao não é valido! ID: "+ request.getExcursao()));
+                    .orElseThrow(ExcursaoNotFoundException::new);
         }
 
         if (request.getOnibus() != null){
             onibusRepository.findById(request.getOnibus())
-                    .orElseThrow(() -> new RuntimeException("O id onibus não é valido! ID: "+ request.getOnibus()));
+                    .orElseThrow(OnibusNotFoundException::new);
         }
 
         mapper.updateEnityFromRequest(request, excursao);

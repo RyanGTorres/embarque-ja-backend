@@ -4,6 +4,7 @@ import com.excursao.marcinho.dto.request.ExcursaoOnibusRequest;
 import com.excursao.marcinho.dto.response.ExcursaoOnibusResponse;
 
 import com.excursao.marcinho.service.ExcursaoOnibusService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,12 +29,12 @@ public class OnibusExcursaoController {
     }
 
     @PostMapping
-    public ResponseEntity<ExcursaoOnibusResponse> save (@RequestBody ExcursaoOnibusRequest request){
+    public ResponseEntity<ExcursaoOnibusResponse> save (@Valid @RequestBody ExcursaoOnibusRequest request){
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(request));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ExcursaoOnibusResponse> update (@PathVariable Long id,@RequestBody ExcursaoOnibusRequest request ){
+    public ResponseEntity<ExcursaoOnibusResponse> update (@PathVariable Long id,@Valid @RequestBody ExcursaoOnibusRequest request ){
         return ResponseEntity.ok(service.update(id, request));
     }
 

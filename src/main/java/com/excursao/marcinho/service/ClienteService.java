@@ -3,6 +3,7 @@ package com.excursao.marcinho.service;
 import com.excursao.marcinho.dto.request.ClienteRequest;
 import com.excursao.marcinho.dto.response.ClienteResponse;
 import com.excursao.marcinho.entity.Cliente;
+import com.excursao.marcinho.exceptions.notfound.ClienteNotFoundException;
 import com.excursao.marcinho.mapper.ClienteMapper;
 import com.excursao.marcinho.repository.ClienteRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,14 +24,13 @@ public class ClienteService {
 
     public ClienteResponse findById(Long id){
      Cliente cliente = clienteRepository.findById(id)
-             .orElseThrow(() -> new RuntimeException("O id do cliente não foi encontrado"));
+             .orElseThrow(ClienteNotFoundException::new);
      return mapper.toResponse(cliente);
     }
 
     public ClienteResponse update(Long id, ClienteRequest clienteRequest){
         Cliente cliente = clienteRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("O id do cliente não foi encontrado"));
-
+                .orElseThrow(ClienteNotFoundException::new);
         mapper.updateResponseFromRequest(clienteRequest, cliente);
 
         Cliente atualizado = clienteRepository.save(cliente);
@@ -39,5 +39,9 @@ public class ClienteService {
 
     public List<ClienteResponse> findAll(){
         return mapper.toListResponse(clienteRepository.findAll());
+    }
+
+    public void deleteById(Long id){
+        clienteRepository.deleteById(id);
     }
 }

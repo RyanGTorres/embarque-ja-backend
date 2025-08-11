@@ -13,6 +13,7 @@ public interface ExcursaoMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "excursaoOnibus", ignore = true)
     @Mapping(target = "embarques", ignore = true)
+    @Mapping(target = "statusViagem", ignore = true)
     Excursao toEntity (ExcursaoRequest excursaoRequest);
 
     @Mapping(target = "embarques", source = "embarques")

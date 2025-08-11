@@ -1,4 +1,4 @@
-# Sistema de Gerenciamento de Excursões - Marcinho
+# Sistema de Gerenciamento de Excursões
 
 ## 📋 Descrição do Projeto
 
@@ -144,3 +144,4 @@ Este projeto está sob a licença [LICENSE]. Veja o arquivo `LICENSE` para mais 
 ---
 
 ⭐ **Gostou do projeto? Deixe uma estrela!**
+

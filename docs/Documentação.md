@@ -64,6 +64,4 @@ Com base na análise das personas foram identificadas as seguintes histórias de
 <img width="6592" height="3174" alt="Diagrama em branco (3)" src="https://github.com/user-attachments/assets/123953a2-86f3-4afd-90d3-cb413261d067" />
 
 ## Diagrama de Entidades
-<img width="4230" height="2183" alt="Diagrama em branco (4)" src="https://github.com/user-attachments/assets/2a0746bc-f84a-41f3-a022-2546eef01948" />
-
-
+![Diagrama em branco](https://github.com/user-attachments/assets/054ea72a-a63e-42f1-b499-378a7d227c98)

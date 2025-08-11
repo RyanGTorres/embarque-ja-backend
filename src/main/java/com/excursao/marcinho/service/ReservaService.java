@@ -1,29 +1,23 @@
 package com.excursao.marcinho.service;
 
 import com.excursao.marcinho.dto.request.ReservaRequest;
-import com.excursao.marcinho.dto.response.AssentoView;
 import com.excursao.marcinho.dto.response.ReservaResponse;
 import com.excursao.marcinho.entity.Cliente;
-import com.excursao.marcinho.entity.Excursao;
 import com.excursao.marcinho.entity.ExcursaoOnibus;
 import com.excursao.marcinho.entity.Reserva;
 import com.excursao.marcinho.enums.StatusAssento;
 import com.excursao.marcinho.exceptions.BusinessException;
 import com.excursao.marcinho.exceptions.notfound.ClienteNotFoundException;
 import com.excursao.marcinho.exceptions.notfound.ExcursaoOnibusNotFoundException;
-import com.excursao.marcinho.exceptions.notfound.NotFoundException;
+import com.excursao.marcinho.exceptions.notfound.ReservaNotFoundException;
 import com.excursao.marcinho.mapper.ReservaMapper;
 import com.excursao.marcinho.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import java.time.LocalDateTime;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -79,20 +73,22 @@ public class ReservaService {
 
 
     public List<ReservaResponse> findAllReservaByOnibusExcursaoId (Long id){
-           List<Reserva> reservaList = reservaRepository.findByExcursaoOnibusId(id);
+           List<Reserva> reservaList = reservaRepository.findByExcursaoOnibusIdAndStatusAssento(id, StatusAssento.RESERVADO);
            return mapper.toListResponse(reservaList);
     }
 
-//    public List<AssentoView> listarAssentos (Long excursaoId){
-//
-//        ExcursaoOnibus excursaoOnibus = excursaoOnibusRepository.findById(excursaoId)
-//                .orElseThrow(ExcursaoOnibusNotFoundException::new);
-//
-//        Integer totalAssentos = excursaoOnibus.getOnibus().getTotalAssentos();
-//
-//        List<Reserva> reservaList = reservaRepository.findByExcursaoOnibusIdAndStatusAssentoNot(
-//                excursaoId, StatusAssento.LIVRE);
-//
-//    }
+    public List<ReservaResponse> findAllReservaCanceled(Long id){
+        List<Reserva> reservaList = reservaRepository.findByExcursaoOnibusIdAndStatusAssento(id, StatusAssento.CANCELADO);
+        return mapper.toListResponse(reservaList);
+    }
+
+    public void cancelarReserva (Long excursaoId, Integer numeroAssento){
+        Reserva reserva = reservaRepository.findByNumeroAssentoAndExcursaoOnibusId(excursaoId,numeroAssento)
+                        .orElseThrow(ReservaNotFoundException::new);
+        reserva.setStatusAssento(StatusAssento.CANCELADO);
+        reservaRepository.save(reserva);
+    }
+
+
 
 }

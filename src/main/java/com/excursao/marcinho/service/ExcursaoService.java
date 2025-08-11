@@ -4,6 +4,7 @@ import com.excursao.marcinho.dto.request.ExcursaoRequest;
 import com.excursao.marcinho.dto.response.ExcursaoResponse;
 import com.excursao.marcinho.entity.Embarque;
 import com.excursao.marcinho.entity.Excursao;
+import com.excursao.marcinho.enums.StatusViagem;
 import com.excursao.marcinho.exceptions.notfound.EmbarqueNotFoundException;
 import com.excursao.marcinho.exceptions.notfound.ExcursaoNotFoundException;
 import com.excursao.marcinho.mapper.ExcursaoMapper;
@@ -12,6 +13,7 @@ import com.excursao.marcinho.repository.ExcursaoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +38,7 @@ public class ExcursaoService {
             excursao.setEmbarques(embarques);
         }
 
+        excursao.setStatusViagem(StatusViagem.DISPONIVEL);
         Excursao atualizado = excursaoRepository.save(excursao);
         return mapper.toResponse(atualizado);
 
@@ -50,6 +53,12 @@ public class ExcursaoService {
     public ExcursaoResponse findById(Long id){
         Excursao excursao = excursaoRepository.findById(id)
                 .orElseThrow(ExcursaoNotFoundException::new);
+
+        if (LocalDate.now().isAfter(excursao.getDataSaida())){
+            excursao.setStatusViagem(StatusViagem.FINALIZADA);
+            excursaoRepository.save(excursao);
+        }
+
         return mapper.toResponse(excursao);
     }
 
@@ -80,4 +89,5 @@ public class ExcursaoService {
     public void deleteById(Long id){
         excursaoRepository.deleteById(id);
     }
+
 }

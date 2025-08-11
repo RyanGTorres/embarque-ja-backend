@@ -14,16 +14,16 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 
 class MarcinhoApplicationTests {
-	@Autowired
-	private ReservaRepository reservaRepository;
-	@Autowired
-	private AssentoRepository assentoRepository;
-	@Autowired
-	private ClienteRepository clienteRepository;
-	@Autowired
-	private OnibusRepository onibusRepository;
-	@Autowired
-	private ExcursaoRepository excursaoRepository;
+//	@Autowired
+//	private ReservaRepository reservaRepository;
+//	@Autowired
+//	private AssentoRepository assentoRepository;
+//	@Autowired
+//	private ClienteRepository clienteRepository;
+//	@Autowired
+//	private OnibusRepository onibusRepository;
+//	@Autowired
+//	private ExcursaoRepository excursaoRepository;
 
 	@AfterEach
 	void depoisDeCada(){

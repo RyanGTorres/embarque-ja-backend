@@ -1,10 +1,5 @@
 package com.excursao.marcinho.dto.response;
-
-import com.excursao.marcinho.dto.request.OnibusRequest;
-import com.excursao.marcinho.entity.Excursao;
-import com.excursao.marcinho.entity.Onibus;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,8 +9,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Schema(description = "Dados de resposta do Excursão com Onibus")
 public class ExcursaoOnibusResponse {
+    @Schema(description = "ID único do Excursão com Onibus", example = "1")
     private Long id;
+
+    @Schema(description = "ID único do Onibus", example = "1")
     private OnibusResponse onibus;
+
+    @Schema(description = "ID único da Excursão", example = "3")
     private ExcursaoResponse excursao;
 }

@@ -40,4 +40,8 @@ public class ClienteService {
     public List<ClienteResponse> findAll(){
         return mapper.toListResponse(clienteRepository.findAll());
     }
+
+    public void deleteById(Long id){
+        clienteRepository.deleteById(id);
+    }
 }

@@ -1,4 +1,4 @@
-# Sistema de Gerenciamento de Excursões
+# Sistema de Gerenciamento de Excursões - EmbarqueJá
 
 ## 📋 Descrição do Projeto
 
@@ -144,4 +144,5 @@ Este projeto está sob a licença [LICENSE]. Veja o arquivo `LICENSE` para mais 
 ---
 
 ⭐ **Gostou do projeto? Deixe uma estrela!**
+
 

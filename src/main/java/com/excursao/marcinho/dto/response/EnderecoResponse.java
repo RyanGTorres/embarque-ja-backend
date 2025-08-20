@@ -1,6 +1,7 @@
 package com.excursao.marcinho.dto.response;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,8 +17,13 @@ public class EnderecoResponse {
     private Long id;
     @Schema(description = "Logradouro do cliente", example = "Rua das flores")
     private String logradouro;
-    @Schema(description = "Região do cliente", example = "(Justinopolis)")
-    private String regiao;
+
+    @Schema(description = "Numero da casa onde o cliente reside", example = "45B")
+    private String numero;
+
+    @Schema(description = "Estado onde o cliente reside", example = "MG")
+    private String estado;
+
     @Schema(description = "Bairro do cliente", example = "Santana")
     private String bairro;
     @Schema(description = "Cidade do cliente", example = "Belo Horizonte")

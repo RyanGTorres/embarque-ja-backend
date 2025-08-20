@@ -21,8 +21,11 @@ public class Endereco {
     @Column(name = "logradouro")
     private String logradouro;
 
-    @Column(name = "regiao")
-    private String regiao;
+    @Column(name = "numero")
+    private String numero;
+
+    @Column(name = "estado")
+    private String estado;
 
     @Column(name = "bairro")
     private String bairro;

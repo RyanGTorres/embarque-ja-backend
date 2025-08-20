@@ -1,6 +1,7 @@
 package com.excursao.marcinho.dto.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
@@ -13,9 +14,13 @@ public class EnderecoRequest {
     @NotBlank(message = "Logradouro não deve estar em branco.")
     private String logradouro;
 
-    @Schema(type = "string", description = "Região onde o cliente reside", example = "(Justinopolis)")
-    @NotBlank(message = "Região não deve estar em branco.")
-    private String regiao;
+    @Schema(type = "string", description = "Numero da casa onde o cliente reside", example = "45B")
+    @NotBlank(message = "O numero da casa não deve estar em branco.")
+    private String numero;
+
+    @Schema(type = "string", description = "Estado onde o cliente reside", example = "MG")
+    @NotBlank(message = "O estado não deve estar em branco.")
+    private String estado;
 
     @Schema(type = "string", description = "Bairro onde o cliente reside", example = "Santana")
     @NotBlank(message = "Bairro não deve estar em branco.")

@@ -14,14 +14,17 @@ public interface ExcursaoMapper {
     @Mapping(target = "excursaoOnibus", ignore = true)
     @Mapping(target = "embarques", ignore = true)
     @Mapping(target = "statusViagem", ignore = true)
+    @Mapping(target = "hoteis", ignore = true)
     Excursao toEntity (ExcursaoRequest excursaoRequest);
 
     @Mapping(target = "embarques", source = "embarques")
+    @Mapping(target = "hoteis", source = "hoteis")
     ExcursaoResponse toResponse(Excursao excursao);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "excursaoOnibus", ignore = true)
     @Mapping(target = "embarques", ignore = true)
+    @Mapping(target = "hoteis",ignore = true)
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateEntityFromRequest (ExcursaoRequest excursaoRequest, @MappingTarget Excursao excursao);
 

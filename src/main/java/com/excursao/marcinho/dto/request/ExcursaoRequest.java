@@ -21,10 +21,6 @@ import java.util.List;
 @NoArgsConstructor
 public class ExcursaoRequest {
 
-    @Schema(type = "string", description = "Compo de preenchimento de Hotel", example = "Hotel Bela Vista" )
-    @NotBlank(message = "Hotel não deve estar em branco.")
-    private String hotel;
-
     @Schema(type = "string", description = "Compo de preenchimento da Origem", example = "Belo Horizonte" )
     @NotBlank(message = "Origem não deve estar em branco.")
     private String origem;
@@ -43,4 +39,5 @@ public class ExcursaoRequest {
     @NotNull(message = "Data de Retorno não deve estar em branco.")
     private LocalDate dataRetorno;
     private List<Long> embarquesIds;
+    private List<Long> hoteisIds;
 }

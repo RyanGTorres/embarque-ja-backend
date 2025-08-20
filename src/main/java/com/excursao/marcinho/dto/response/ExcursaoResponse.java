@@ -19,8 +19,6 @@ import java.time.LocalDate;
 public class ExcursaoResponse {
     @Schema(description = "ID único da Excursão", example = "1")
     private Long id;
-    @Schema(description = "Nome do Hotel", example = "Hotel Bela Vista")
-    private String hotel;
     @Schema(description = "Status da Viagem", example = "DISPONIVEL")
     private StatusViagem statusViagem;
     @Schema(description = "Nome da origem", example = "Belo Horizonte")
@@ -33,5 +31,7 @@ public class ExcursaoResponse {
     private LocalDate dataRetorno;
     @Schema(description = "IDs de lista de embarques", example = "1,3")
     private List<EmbarqueResponse> embarques;
+    @Schema(description = "IDs de hoteis", example = "1,3")
+    private List<HotelResponse> hoteis;
 }
 

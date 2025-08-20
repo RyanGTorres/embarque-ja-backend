@@ -20,9 +20,6 @@ public class Excursao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "hotel")
-    private String hotel;
-
     @Column(name = "origem")
     private String origem;
 
@@ -38,6 +35,14 @@ public class Excursao {
     @Enumerated(EnumType.STRING)
     @Column(name = "status_viagem")
     private StatusViagem statusViagem;
+
+    @ManyToMany
+    @JoinTable(
+            name = "excusao_hotel",
+            joinColumns = @JoinColumn(name = "excursao_id"),
+            inverseJoinColumns = @JoinColumn(name = "hotel_id")
+    )
+    private List<Hotel> hoteis;
 
     @ManyToMany
     @JoinTable(

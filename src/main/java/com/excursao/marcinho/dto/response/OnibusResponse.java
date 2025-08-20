@@ -1,6 +1,7 @@
 package com.excursao.marcinho.dto.response;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,6 +22,12 @@ public class OnibusResponse {
 
     @Schema(description = "Nome da empresa", example = "Mar e Praia")
     private String empresa;
+
+    @Schema(description = "Tipo de Assentos", example = "Leito-Total")
+    private String tipoAssento;
+
+    @Schema(description = "Quantidade de Andares", example = "2 Andares")
+    private String quantidadeAndares;
 
     @Schema(description = "Total de Assentos", example = "64")
     private Integer totalAssentos;

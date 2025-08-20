@@ -27,6 +27,12 @@ public class Onibus {
     @Column(name = "total_assentos")
     private Integer totalAssentos;
 
+    @Column(name = "tipo_assento")
+    private String tipoAssento;
+
+    @Column(name = "quantidade_andares")
+    private String quantidadeAndares;
+
     @OneToMany(mappedBy = "onibus")
     private List<ExcursaoOnibus> excursaoOnibus;
 

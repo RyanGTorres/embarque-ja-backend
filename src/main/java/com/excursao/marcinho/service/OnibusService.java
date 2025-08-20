@@ -3,6 +3,7 @@ package com.excursao.marcinho.service;
 import com.excursao.marcinho.dto.request.OnibusRequest;
 import com.excursao.marcinho.dto.response.OnibusResponse;
 import com.excursao.marcinho.entity.Onibus;
+import com.excursao.marcinho.exceptions.conflict.ConflictException;
 import com.excursao.marcinho.exceptions.notfound.OnibusNotFoundException;
 import com.excursao.marcinho.mapper.OnibusMapper;
 import com.excursao.marcinho.repository.OnibusRepository;
@@ -17,6 +18,12 @@ public class OnibusService {
     private final OnibusMapper mapper;
 
     public OnibusResponse save (OnibusRequest request){
+        boolean existsOnibus = repository.existsByModeloAndEmpresa(request.getModelo(), request.getEmpresa());
+
+        if (existsOnibus){
+            throw new ConflictException("Já existe um onibus com essas informações!");
+        }
+
         Onibus onibus = mapper.toEntity(request);
         Onibus salvo = repository.save(onibus);
         return mapper.toResponse(salvo);

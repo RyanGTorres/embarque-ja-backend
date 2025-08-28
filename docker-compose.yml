@@ -1,12 +1,46 @@
-version: '3.8'
+version: "3.9"
+
 services:
-  postgres:
+  excursaodb:
     image: postgres
-    container_name: marcinho-excursoes-backend
+    container_name: excursaodb
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: marcinhotest
-    restart: always
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     ports:
-      - "5400:5432"
+      - "5432:5432"
+    volumes:
+      - excursao_data:/var/lib/postgresql/data
+    networks:
+      - backend
+    restart: unless-stopped
+
+  appservice:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: appservice
+    ports:
+      - "8080:8080"
+    networks:
+      - backend
+    depends_on:
+      - excursaodb
+    restart: unless-stopped
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://excursaodb:5432/excursao_db
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
+      SPRING_JPA_HIBERNATE_DDL_AUTO: create
+      SPRING_JPA_SHOW_SQL: "true"
+    command: >
+      sh -c "./wait-for-it.sh excursaodb:5432 --timeout=30 --strict -- java -jar /app/app.jar"
+
+volumes:
+  excursao_data:
+
+networks:
+  backend:
+    driver: bridge

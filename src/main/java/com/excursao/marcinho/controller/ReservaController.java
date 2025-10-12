@@ -66,9 +66,9 @@ public class ReservaController {
     })
     @DeleteMapping
     public ResponseEntity<Void> cancelarReserva(
-            @RequestParam Long excursaoId,
+            @RequestParam Long clienteId,
             @RequestParam Integer numeroAssento) {
-        reservaService.cancelarReserva(excursaoId, numeroAssento);
+        reservaService.cancelarReserva(clienteId, numeroAssento);
         return ResponseEntity.noContent().build();
     }
 }

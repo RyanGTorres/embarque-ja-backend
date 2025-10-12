@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "excursao_onibus")
 @Data
@@ -25,4 +28,7 @@ public class ExcursaoOnibus {
     @ManyToOne
     @JoinColumn(name = "excursao_id")
     private Excursao excursao;
+
+    @OneToMany(mappedBy = "excursaoOnibus", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Reserva> reservas = new ArrayList<>();
 }

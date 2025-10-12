@@ -82,11 +82,12 @@ public class ReservaService {
         return mapper.toListResponse(reservaList);
     }
 
-    public void cancelarReserva (Long excursaoId, Integer numeroAssento){
-        Reserva reserva = reservaRepository.findByNumeroAssentoAndExcursaoOnibusId(excursaoId,numeroAssento)
+    public void cancelarReserva (Long clienteId, Integer numeroAssento){
+        Reserva reserva = reservaRepository.findByClienteIdAndNumeroAssento(clienteId,numeroAssento)
                         .orElseThrow(ReservaNotFoundException::new);
         reserva.setStatusAssento(StatusAssento.CANCELADO);
-        reservaRepository.save(reserva);
+        reserva.setNumeroAssento(null);
+        reservaRepository.delete(reserva);
     }
 
 
